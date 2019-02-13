@@ -187,313 +187,88 @@ $(document).ready(function () {
 </div>
 
 
-<br>
-<center>
-<img src="data:image/png;base64,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" width="500">
-</center>
-<div id="course-visual-analytics-for-policy-and-management" class="section level2">
-<h2>Course: Visual Analytics for Policy and Management</h2>
-<div id="prof.jose-manuel-magallanes-phd" class="section level3">
-<h3>Prof. José Manuel Magallanes, PhD</h3>
-<hr />
-<p><a id="part1"></a></p>
-</div>
-</div>
-<div id="part-2-visualizing-tabular-data" class="section level1">
-<h1>Part 2: Visualizing Tabular data</h1>
-<div id="univariate-case" class="section level3">
-<h3>Univariate Case</h3>
-<hr />
-<p>Contents:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="#part1">Intro.</a></p></li>
-<li><p><a href="#part2">GGPlot.</a></p></li>
-<li><p><a href="#part3">Pie Charts and Bar Graphs.</a></p></li>
-</ol>
-<hr />
-</div>
-</div>
-<div id="intro-prepping-the-data" class="section level1">
-<h1>Intro: Prepping the Data</h1>
-<p><a href="#part1">Go to table of contents.</a> <a id="part1"></a></p>
-<pre class="r"><code>#Loading the Data and Plug-Ins
-link='https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'
-load(file=url(link))
+<p>title: ‘DataVis 599 B: TabularData Univariate Homework’ author: ‘Group 4: Haotian Bu, Aishe Memetova, Jon White, Vitalii Zakhozhyi’ output: html_document: df_print: paged</p>
+<p>Using the Seattle Sound Transit Data of October-November 2015, we will try to answer whether riders in Seattle still pay the transit fare using cash.</p>
+<p><strong>Loading neccessary packages, calling dataset and preparing it for analysis</strong></p>
+<div id="intro-loading-data-and-describing-the-data" class="section level1">
+<h1>INTRO: Loading Data and Describing the Data</h1>
+<p><a id="intro"></a></p>
+<pre class="r"><code>#Loading the Data
+mydata1=read.csv(&quot;https://raw.githubusercontent.com/jwhite00/VisualAnalytics_2_tabularData/master/data/newLinkData.csv&quot;)
 library(ggplot2)
-library(scales)
-library(summarytools)</code></pre>
-<pre class="r"><code># relative values
-absoluteT=table(eduwa$LocaleType,exclude = 'nothing')
-ToPlot=prop.table(absoluteT)
-
-
-# details:
-ToPlot=ToPlot*100 # preparing labels
-plotLabels=paste0(round(ToPlot,2),'%') # labels for the slices
-
-
-#Titles
-titleText='Where are Public Schools located in WA in 2019?'
-titleText2='What is Preventing a More Equal Distribution of Schools?'
-sourceText='Source: US Department of Education'
-
-#colorpalletes
-paletteHere=rainbow(length(ToPlot)) # customizing set of colors
-
-paletteHereNew=c('gray') # just one color</code></pre>
+library(scales)</code></pre>
 </div>
-<div id="exercise-1-ggplot-bar-plots" class="section level1">
-<h1>Exercise 1: GGPlot Bar Plots</h1>
-<p><a href="#part1">Go to table of contents.</a> <a id="part1"></a></p>
-<pre class="r"><code>tableFreq=as.data.frame(ToPlot)
-names(tableFreq)=c(&quot;locale&quot;,&quot;pct&quot;)
+<div id="table-prep" class="section level1">
+<h1>Table Prep:</h1>
+<pre class="r"><code>absoluteT=table(mydata1$origin,exclude = '#NULL!')#saving absolute values table
+ToPlot=prop.table(absoluteT)# saving table of values as percentage of total
+ToPlot=ToPlot*100# preparing labels (i.e. changing from decimal to percent)
+plotLabels=paste0(round(ToPlot,2),'%')  # labels for the slices
+
+#Making the Title of the Chart
+titleText='How are people getting to Link Light Rail Stations?'
+sourceText='Source: Sound Transit 2015 Onboard Survey Data'
+
+paletteHere=rainbow(length(ToPlot)) # customizing set of colors
+paletteHereNew=c('gray') # just one color
+
+#prepping GGPlot
+tableFreq=as.data.frame(ToPlot)
+names(tableFreq)=c(&quot;origin_mode&quot;,&quot;pct&quot;)
+
 tableFreq[order(-tableFreq$pct),]
 tableFreq0 = tableFreq[order(-tableFreq$pct),] #setup for allowing us to order</code></pre>
+<p><a href="#part1">Go to table of contents.</a> #PART 1: GGPLOT <a id="part1"></a></p>
 <pre class="r"><code>#base GGPLOT2 starts with a &quot;base&quot;, telling WHAT VARIABLES TO PLOT
 base= ggplot(data = tableFreq0, 
-             aes(x = reorder(locale,pct), #command for ordering
+             aes(x = reorder(origin_mode,pct), #command for ordering
                  y = pct)) 
 
+#initial bar graph
 plot1 = base + geom_bar(fill =&quot;gray&quot;,
                         stat = 'identity') # y is just what it is!
 
-plot2 = plot1 + labs(title=titleText2,
-                     x =NULL, 
-                     y = NULL,
+#Use Less ink
+plot2 = plot1 + theme(panel.background = element_rect(fill = &quot;white&quot;,
+                                                    colour = &quot;grey50&quot;),
+                    plot.caption = element_text(hjust = 0), # default was 1
+                    plot.title = element_text(hjust = 0.5))
+
+#Adding Titles/Labels
+plot3 = plot2 + labs(title=titleText, 
+                     x ='origin Mode', 
+                     y = '%',
                      caption = sourceText)
 
-plot3 = plot2 + geom_hline(yintercept = 25, #where
-                           linetype=&quot;dashed&quot;, 
-                           size=1.5, #thickness
-                           alpha=0.5) #transparency
-
-# customize Y axis
-plot4 = plot3 + scale_y_continuous(breaks=c(0,10, 25,40,50),
+plot4 = plot3 + scale_y_continuous(breaks=c(0,10, 20,30,40,50),
                                  limits = c(0, 50), # expand = c(0, 0),
                                  labels=scales::unit_format(suffix = '%')) 
 
-plot5 = plot4 + theme(panel.background = element_rect(fill = &quot;white&quot;,
-                                                    colour = &quot;grey50&quot;),
-                    plot.caption = element_text(hjust = 0), # default was 1
-                    plot.title = element_text(hjust = 0.5))
-
-plot6 = plot5 + geom_text(aes(y = pct , 
+plot5= plot4 + geom_text(aes(y = pct , 
                             label = paste0(round(pct,2), '%')),
-                        vjust=3, 
+                        vjust=-1, # if flipping 'hjust'
                         size = 3)
-plot6 </code></pre>
-<pre class="r"><code>#flip the plot
-plot7 = plot5 + geom_text(aes(y = pct , 
-                            label = paste0(round(pct,2), '%')),
-                        hjust=-.03, # if flipping 'hjust'
-                        size = 3)
-plot7 + coord_flip()</code></pre>
-</div>
-<div id="part-1.3-pie-chart-and-bar-graphs" class="section level1">
-<h1>Part 1.3: Pie Chart and Bar Graphs</h1>
-<p><a href="#part3">Go to table of contents.</a> <a id="part3"></a></p>
-</div>
-<div id="pie-chart" class="section level1">
-<h1>Pie Chart</h1>
-<pre class="r"><code>pie(x=ToPlot,#table
-    col = paletteHere, 
-    labels = plotLabels,
-    main=titleText,
-    sub=sourceText)
-#legend
-legend(x=&quot;right&quot;, #where
-       legend=names(ToPlot), #text
-       fill = paletteHere,
-       bty = 'n', # no box
-       cex = 0.93  # shrink
-       ) #symbols' colors</code></pre>
-</div>
-<div id="bar-graph" class="section level1">
-<h1>Bar Graph</h1>
-<pre class="r"><code># plotting
-location=barplot(ToPlot,
-     col = paletteHere,
-     border=NA,
-     main=titleText,
-     sub=sourceText,
-     ylim=c(0,50),
-     ylab = '(in %)')
-
-#annotating
-text(x=location,y=ToPlot,labels=plotLabels,
-     pos = 3,# if pos=3, text will be on top of bar
-     cex = 0.8) </code></pre>
+plot5</code></pre>
 </div>
 <div id="reference-line" class="section level1">
 <h1>Reference Line</h1>
-<pre class="r"><code>par(mgp=c(1,0.5,0)) 
-location=barplot(ToPlot,
-         col = paletteHere,
-         border=NA,
-         main=titleText2,
-         xlim=c(0,50), 
-         xlab = '(in %)',
-         cex.names=0.6,
-         cex.lab=0.6,
-         las=2,
-         horiz = T,
-         xaxt=&quot;n&quot;) # no x-axis, so I customize it below...
-
-text(x=ToPlot,y=location,labels=plotLabels,pos = 4,cex = 0.7) 
-title(sub=sourceText, adj=0,cex.sub=0.7,line = 3) 
-
-#reference line
-abline(v=25,lty=3,lwd=3)
-
-# customizing tick values
-newXvalues&lt;-c(0,10,25,40,50) # you just want to show this on the axis
-axis(side=1, 
-     at=newXvalues, 
-     labels = newXvalues,
-     cex.axis=0.8)</code></pre>
+<pre class="r"><code>#adding a reference line
+plot6 = plot5 + geom_hline (yintercept = 20, #where
+                           linetype=&quot;dashed&quot;, 
+                           size=1.5, #thickness
+                           alpha=0.5) #transparency
+plot6</code></pre>
 </div>
-<div id="exercise-2" class="section level1">
-<h1>EXERCISE 2</h1>
-<p><a href="#part1">Go to table of contents.</a> <a id="part3"></a></p>
-<pre class="r"><code>link='https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'
-load(file=url(link))
-
-absoluteT=table(eduwa$LocaleType,exclude = 'nothing')
-ToPlot=prop.table(absoluteT)
-
-ToPlot1=ToPlot*100
-paletteHere=rainbow(length(ToPlot1)) # customizing set of colors
-tableFreq=as.data.frame(ToPlot1)
-names(tableFreq)=c(&quot;locale&quot;,&quot;pct&quot;)
-tableFreqO=tableFreq[order(tableFreq$pct),]#setup for allowing us to order</code></pre>
-<pre class="r"><code># reordering DF steps:
-base = ggplot(tableFreqO, aes(locale,pct)) 
-lolliplot1=base + geom_segment(aes(y = 0, 
-                                   x = locale, 
-                                   yend = pct, 
-                                   xend = locale), color = &quot;gray&quot;) 
-lolliplot2 = lolliplot1 + geom_point()
-lolliplot3= lolliplot2 + scale_x_discrete(limits=tableFreqO$locale) # key element
-
-lolliplot3</code></pre>
-<p>Maybe add some extra info:</p>
-<pre class="r"><code># new variable
-tableFreqO$gap=tableFreqO$pct-25
-
-# a new column for color
-tableFreqO$PositiveGap=ifelse(tableFreqO$gap&gt;0,T,F)
-
-base = ggplot(tableFreqO, aes(locale,gap,color=PositiveGap,
-                              label = round(gap,3))) #  change
-lolliplot1=base + geom_segment(aes(y = 0, 
-                                   x = locale, 
-                                   yend = gap, 
-                                   xend = locale), color = &quot;gray&quot;) 
-lolliplot2=lolliplot1 + geom_point() 
-
-lolliplot3 = lolliplot2 + labs(title=titleText2,
-                     x ='Locale', 
-                     y = 'Distance from an Even 25% Split',
-                     caption = sourceText)
-
-lolliplot4 = lolliplot3 + theme(panel.background = element_rect(fill = &quot;white&quot;,
-                                                    colour = &quot;grey50&quot;),
-                    plot.caption = element_text(hjust = 0), # default was 1
-                    plot.title = element_text(hjust = 0.5))
-
-# annotating and moving the text on the horizontal
-lolliplot5= lolliplot4 + scale_x_discrete(limits=tableFreqO$locale) 
-
-# annotating and moving the text on the horizontal
-lolliplot6 = lolliplot5 + geom_text(aes(y = gap , 
-                            label = paste0(round(gap,2), '%')),
-                        vjust=1, # if flipping 'hjust'
-                        size = 3, nudge_x=0.3, show.legend = FALSE)  
-
-lolliplot7 = lolliplot6 + coord_cartesian(ylim = c(-25, 15)) + geom_hline(yintercept = 0,
-           linetype=&quot;dashed&quot;,
-           size=1,
-           alpha=0.3)
-lolliplot7</code></pre>
-<p><a href="#part1">Go to table of contents.</a></p>
-</div>
-<div id="exercise-3" class="section level1">
-<h1>EXERCISE 3</h1>
-<p><a href="#part1">Go to table of contents.</a> <a id="part312"></a></p>
-<pre class="r"><code>#Prepping Tables
-frqTabO=as.data.frame(prop.table(table(eduwa$High.Grade)))
-names(frqTabO)=c('grade','pct')
-ordLabels= levels(eduwa$High.Grade)
-
-titleText='Distribution of Grade Levels \nin WA Public Schools'
-sourceText = 'Source: US Department of Education'</code></pre>
-<pre class="r"><code>base = ggplot(frqTabO,aes(x=grade,y=percent))
-# as.numeric produces turns levels of the factor into numbers
-box1 = ggplot(eduwa, aes(y=as.numeric(High.Grade))) 
-
-box1 = box1 + geom_boxplot() + coord_flip() 
-
-box2 = box1 + scale_y_continuous(labels=ordLabels,breaks=1:15)
-
-box3 = box2 + labs(title=titleText,
-                   caption=sourceText,
-                   xlab=NULL)
-
-box4 = box3 + theme(plot.margin = unit(c(0.8,1.2,1,1.13), 'cm'),
-                    text = element_text(colour = 'black'),
-             plot.title = element_text(hjust=0.5,
-                                       face = 'bold',
-                                  size = 15),
-             plot.caption = element_text(size = 8),
-             panel.background = element_rect(fill = 'white'),
-             axis.ticks = (element_line(linetype = &quot;blank&quot;)),
-             axis.text.y = element_blank(),
-             axis.title.x = element_blank())
-
-box4 + scale_x_continuous(limits=c(-.56,.56)) </code></pre>
-</div>
-<div id="exercise-4" class="section level1">
-<h1>Exercise 4</h1>
-<p><a href="#part1">Go to table of contents.</a></p>
-<p><a id="part32"></a></p>
-<pre class="r"><code>eduwafl=eduwa[complete.cases(eduwa$Free.Lunch),]
-
-titleText='Most schools provide free lunches to less than 500 students'
-sourceText='Source: US Department of Education'</code></pre>
-<div id="counting" class="section level3">
-<h3>Counting</h3>
-<pre class="r"><code>#base
-base= ggplot(eduwafl,aes(x = Free.Lunch))  
-
-#changing width and color
-h1= base + geom_histogram(binwidth = 100,boundary=0, color='black', fill='white')
-
-#adds values above bars
-h2 = h1 + stat_bin(binwidth = 100, aes(label=..count..), geom = &quot;text&quot;,boundary = 0,vjust=-0.5, 
-                   size = 2.9)
-
-#Titles and Axis
-h3 = h2 + labs(title=titleText, caption=sourceText, x = &quot;Students Receiving Free Lunches&quot;, 
-               y = &quot;# of Schools&quot;)
-
-#Title, white-out background, source 
-h4 = h3 + theme(plot.margin = unit(c(1,1,.5,.5), 'cm'),
-                text = element_text(colour = 'black'), 
-                plot.title = element_text(hjust=0.5, vjust=4, size = 15, face='bold'), 
-                panel.background = element_rect(fill = 'white'),
-                plot.caption = element_text(size=9),
-                axis.ticks.y = element_blank(),
-                axis.text.y= element_blank())
-                
-#ticks and reference line
-h5 = h4 + scale_x_continuous(breaks=c(0,250,500,750,1000,1250,1500,1750,1000),
-                        limits=c(0,2000)) + geom_vline(xintercept = 500, linetype=&quot;dashed&quot;,
-                                                       size=1, alpha=.4)
-h5</code></pre>
+<div id="flipping-orientation" class="section level1">
+<h1>Flipping Orientation</h1>
+<pre class="r"><code>plot7 = plot4 + geom_text(aes(y = pct , 
+                            label = paste0(round(pct,2), '%')),
+                        hjust=-.1, # if flipping 'hjust'
+                        size = 3)
+plot7 + coord_flip()</code></pre>
 <hr />
 <p><a href="#part1">Go to table of contents.</a></p>
 <p><a href="https://evansdatascience.github.io/VisualAnalytics/">Back to course schedule menu</a></p>
-</div>
 </div>
 
 
