@@ -1,15 +1,12 @@
 <br> 
 <center><img src="http://i.imgur.com/sSaOozN.png" width="500"></center>
 
+##Jonathan White
 ## Course: Visual Analytics for Policy and Management
-
 ### Prof. José Manuel Magallanes, PhD 
 
 _____
 <a id='part1'></a>
-
-# Part 2: Visualizing Tabular data
-### Univariate Case
 
 _____
 
@@ -17,11 +14,15 @@ Contents:
 
 1. [Intro.](#part1)
 
-2. [GGPlot.](#part2) 
+2. [Exercise 1: GGPlot Bar Graphs.](#part2) 
 
-3. [Pie Charts and Bar Graphs.](#part3)
+3. [Exercise 2: Lolliplots.](#part3)
 
+4. [Exercise 3: Box Graphs](#part4)
 
+5. [Exercise 4: Histogram](#part5)
+
+6. [Exercise 5: Density](#part6)
 
 _____
 
@@ -29,53 +30,43 @@ _____
 [Go to table of contents.](#part1)
 <a id='part1'></a>
 
-```{r getData, eval=FALSE}
+
+```{r}
 #Loading the Data and Plug-Ins
-link='https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'
-load(file=url(link))
+load(file=url('https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'))
 library(ggplot2)
 library(scales)
 library(summarytools)
-
 ```
 
-```{r freqTab_rel, eval=FALSE}
-# relative values
+Prepping Tables for GGPlot
+```{r}
 absoluteT=table(eduwa$LocaleType,exclude = 'nothing')
 ToPlot=prop.table(absoluteT)
 
-
-# details:
 ToPlot=ToPlot*100 # preparing labels
 plotLabels=paste0(round(ToPlot,2),'%') # labels for the slices
+ToPlot1=ToPlot*100
 
-
-#Titles
 titleText='Where are Public Schools located in WA in 2019?'
 titleText2='What is Preventing a More Equal Distribution of Schools?'
 sourceText='Source: US Department of Education'
 
-#colorpalletes
 paletteHere=rainbow(length(ToPlot)) # customizing set of colors
-
+paletteHere=rainbow(length(ToPlot1)) # customizing set of colors
 paletteHereNew=c('gray') # just one color
 
+tableFreq=as.data.frame(ToPlot) #for GGPlot
+names(tableFreq)=c("locale","pct")
+tableFreq0 = tableFreq[order(-tableFreq$pct),] #setup for allowing us to order
+tableFreqO=tableFreq[order(tableFreq$pct),]#setup for allowing us to order
 ```
-
 
 #Exercise 1: GGPlot Bar Plots
-[Go to table of contents.](#part1)
-<a id='part1'></a>
-
-```{r ggplot1, eval=FALSE}
-tableFreq=as.data.frame(ToPlot)
-names(tableFreq)=c("locale","pct")
-tableFreq[order(-tableFreq$pct),]
-tableFreq0 = tableFreq[order(-tableFreq$pct),] #setup for allowing us to order
-```
-
-
-```{r ggplot_base, eval=FALSE}
+[Go to table of contents.](#part2)
+<a id='part2'></a>
+`
+```{r bar_gg}
 #base GGPLOT2 starts with a "base", telling WHAT VARIABLES TO PLOT
 base= ggplot(data = tableFreq0, 
              aes(x = reorder(locale,pct), #command for ordering
@@ -111,7 +102,8 @@ plot6 = plot5 + geom_text(aes(y = pct ,
 plot6 
 ```
 
-```{r annot_gg, eval=FALSE}
+
+```{r annot_gg}
 #flip the plot
 plot7 = plot5 + geom_text(aes(y = pct , 
                             label = paste0(round(pct,2), '%')),
@@ -120,95 +112,9 @@ plot7 = plot5 + geom_text(aes(y = pct ,
 plot7 + coord_flip()
 ```
 
-#Part 1.3: Pie Chart and Bar Graphs
+#EXERCISE 2
 [Go to table of contents.](#part3)
 <a id='part3'></a>
-
-#Pie Chart
-```{r rainbowColor, eval=FALSE}
-
-pie(x=ToPlot,#table
-    col = paletteHere, 
-    labels = plotLabels,
-    main=titleText,
-    sub=sourceText)
-#legend
-legend(x="right", #where
-       legend=names(ToPlot), #text
-       fill = paletteHere,
-       bty = 'n', # no box
-       cex = 0.93  # shrink
-       ) #symbols' colors
-
-```
-
-#Bar Graph
-```{r barplotAnnot, eval=FALSE}
-# plotting
-location=barplot(ToPlot,
-     col = paletteHere,
-     border=NA,
-     main=titleText,
-     sub=sourceText,
-     ylim=c(0,50),
-     ylab = '(in %)')
-
-#annotating
-text(x=location,y=ToPlot,labels=plotLabels,
-     pos = 3,# if pos=3, text will be on top of bar
-     cex = 0.8) 
-
-```
-
-#Reference Line
-```{r lastPlot_bar, eval=FALSE}
-
-par(mgp=c(1,0.5,0)) 
-location=barplot(ToPlot,
-         col = paletteHere,
-         border=NA,
-         main=titleText2,
-         xlim=c(0,50), 
-         xlab = '(in %)',
-         cex.names=0.6,
-         cex.lab=0.6,
-         las=2,
-         horiz = T,
-         xaxt="n") # no x-axis, so I customize it below...
-
-text(x=ToPlot,y=location,labels=plotLabels,pos = 4,cex = 0.7) 
-title(sub=sourceText, adj=0,cex.sub=0.7,line = 3) 
-
-#reference line
-abline(v=25,lty=3,lwd=3)
-
-# customizing tick values
-newXvalues<-c(0,10,25,40,50) # you just want to show this on the axis
-axis(side=1, 
-     at=newXvalues, 
-     labels = newXvalues,
-     cex.axis=0.8)
-```
-
-
-#EXERCISE 2
-[Go to table of contents.](#part1)
-<a id='part3'></a>
-
-
-```{r}
-link='https://github.com/EvansDataScience/VisualAnalytics_2_tabularData/raw/master/data/eduwa.rda'
-load(file=url(link))
-
-absoluteT=table(eduwa$LocaleType,exclude = 'nothing')
-ToPlot=prop.table(absoluteT)
-
-ToPlot1=ToPlot*100
-paletteHere=rainbow(length(ToPlot1)) # customizing set of colors
-tableFreq=as.data.frame(ToPlot1)
-names(tableFreq)=c("locale","pct")
-tableFreqO=tableFreq[order(tableFreq$pct),]#setup for allowing us to order
-```
 
 
 ```{r lolli_ord_gg, eval=FALSE}
@@ -220,12 +126,10 @@ lolliplot1=base + geom_segment(aes(y = 0,
                                    xend = locale), color = "gray") 
 lolliplot2 = lolliplot1 + geom_point()
 lolliplot3= lolliplot2 + scale_x_discrete(limits=tableFreqO$locale) # key element
-
-lolliplot3
 ```
 
 Maybe add some extra info:
-```{r lolli_annot_gg, eval=FALSE}
+```{r lolli_annot_gg}
 # new variable
 tableFreqO$gap=tableFreqO$pct-25
 
@@ -266,27 +170,27 @@ lolliplot7 = lolliplot6 + coord_cartesian(ylim = c(-25, 15)) + geom_hline(yinter
 lolliplot7
 ```
 
-[Go to table of contents.](#part1)
-
 
 
 
 #EXERCISE 3
-[Go to table of contents.](#part1)
-<a id='part312'></a>
+[Go to table of contents.](#part4)
+<a id='part4'></a>
 
-```{r ordinalTable, eval=FALSE}
+Prepping data for Box Plot
+
+```{r}
 #Prepping Tables
 frqTabO=as.data.frame(prop.table(table(eduwa$High.Grade)))
 names(frqTabO)=c('grade','pct')
 ordLabels= levels(eduwa$High.Grade)
 
-titleText='Distribution of Grade Levels \nin WA Public Schools'
+titleText2='Distribution of Grade Levels \nin WA Public Schools'
 sourceText = 'Source: US Department of Education'
-
 ```
 
-```{r ordTable_gg, eval=FALSE}
+
+```{r}
 base = ggplot(frqTabO,aes(x=grade,y=percent))
 # as.numeric produces turns levels of the factor into numbers
 box1 = ggplot(eduwa, aes(y=as.numeric(High.Grade))) 
@@ -295,7 +199,7 @@ box1 = box1 + geom_boxplot() + coord_flip()
 
 box2 = box1 + scale_y_continuous(labels=ordLabels,breaks=1:15)
 
-box3 = box2 + labs(title=titleText,
+box3 = box2 + labs(title=titleText2,
                    caption=sourceText,
                    xlab=NULL)
 
@@ -311,15 +215,14 @@ box4 = box3 + theme(plot.margin = unit(c(0.8,1.2,1,1.13), 'cm'),
              axis.title.x = element_blank())
 
 box4 + scale_x_continuous(limits=c(-.56,.56)) 
-
 ```
 
 
 
-#Exercise 4
-[Go to table of contents.](#part1)
 
-<a id='part32'></a>
+#Exercise 4: Histogram
+[Go to table of contents.](#part5)
+<a id='part5'></a>
 
 ```{r}
 
@@ -330,9 +233,7 @@ sourceText='Source: US Department of Education'
 ```
 
 
-
-### Counting
-```{r ggplotHistogram, eval=FALSE}
+```{r ggplotHistogram}
 #base
 base= ggplot(eduwafl,aes(x = Free.Lunch))  
 
