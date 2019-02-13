@@ -35,9 +35,11 @@ library(ggplot2)
 library(scales)
 ```
 
+
+
 #Table Prep:
 ```{r freqTab_abs, eval=FALSE}
-absoluteT=table(mydata1$access,exclude = '#NULL!')#saving absolute values table
+absoluteT=table(mydata1$origin,exclude = '#NULL!')#saving absolute values table
 ToPlot=prop.table(absoluteT)# saving table of values as percentage of total
 
 ToPlot=ToPlot*100# preparing labels (i.e. changing from decimal to percent)
@@ -55,7 +57,7 @@ paletteHereNew=c('gray') # just one color
 ```{r ggplot1, eval=FALSE}
 #creating table to be used by ggplot
 tableFreq=as.data.frame(ToPlot)
-names(tableFreq)=c("access_mode","pct")
+names(tableFreq)=c("origin_mode","pct")
 
 tableFreq[order(-tableFreq$pct),]
 tableFreq0 = tableFreq[order(-tableFreq$pct),] #setup for allowing us to order
@@ -81,7 +83,7 @@ names(mydata1)
 ```{r bar_gg, eval=FALSE}
 #base GGPLOT2 starts with a "base", telling WHAT VARIABLES TO PLOT
 base= ggplot(data = tableFreq0, 
-             aes(x = reorder(access_mode,pct), #command for ordering
+             aes(x = reorder(origin_mode,pct), #command for ordering
                  y = pct)) 
 
 #initial bar graph
@@ -96,7 +98,7 @@ plot2 = plot1 + theme(panel.background = element_rect(fill = "white",
 
 #Adding Titles/Labels
 plot3 = plot2 + labs(title=titleText, 
-                     x ='Access Mode', 
+                     x ='origin Mode', 
                      y = '%',
                      caption = sourceText)
 
@@ -224,7 +226,7 @@ title(sub=sourceText, adj=0,cex.sub=0.7,
 
 ```{r refLine_bar, eval=FALSE}
 
-titleText2='What does a more equal distribution \nof Access Mode Look Like?'
+titleText2='What does a more equal distribution \nof origin Mode Look Like?'
 
 par(mgp=c(1.4,0.4,0)) 
 location=barplot(ToPlot,
