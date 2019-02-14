@@ -265,6 +265,46 @@ h5
 ```
 
 
+#Exercise 5: Density
+[Go to table of contents.](#part6)
+<a id='part6'></a>
+
+
+
+```{r histMeans, eval=FALSE}
+eduwa4=eduwa[complete.cases(eduwa$Student.Teacher.Ratio),]
+# keeping strategy 2: 
+meanValues=tapply(eduwa4$Student.Teacher.Ratio, 
+                  eduwa4$County, 
+                  mean)
+df=as.data.frame(meanValues)
+df$county = rownames(df)
+
+base = ggplot(df, aes(x = meanValues))  
+
+h1 = base + geom_histogram(binwidth = 2,boundary=0, color='black', fill='white')
+
+h2 = h1 + stat_bin(binwidth = 2, aes(label=..count..), 
+                  geom = "text",boundary = 0,vjust=-.65)
+
+h3 = h2 + geom_vline(aes(xintercept=mean(meanValues)),
+            color="gray30", linetype="dashed", size=.7)
+
+h4 = h3 + labs(title="How Do We Decrease the Average Student-Teacher \nRatio in Washington State Counties", x = "Average Student-Teacher Ratio",  y = "# of Counties", caption = "Source: US Department of Education")
+
+h5 = h4 + scale_x_continuous(breaks=c(10,12,14,16,18,20,22,24)) + scale_y_continuous(limits=c(0,19)) 
+
+h5 + theme(panel.background = element_rect(fill="white", color='black'),
+              plot.margin = unit(c(1,1,.5,1),'cm'),
+              plot.title = element_text(color='black',
+                                        face='bold',
+                                        hjust=.7),
+              plot.caption = element_text(size=8),
+              axis.text.y = element_blank(),
+              axis.ticks.y = element_blank())
+```
+
+
 
 _____
 [Go to table of contents.](#part1)
