@@ -271,7 +271,7 @@ h5
 
 
 
-```{r histMeans, eval=FALSE}
+```{r histMeans}
 eduwa4=eduwa[complete.cases(eduwa$Student.Teacher.Ratio),]
 # keeping strategy 2: 
 meanValues=tapply(eduwa4$Student.Teacher.Ratio, 
