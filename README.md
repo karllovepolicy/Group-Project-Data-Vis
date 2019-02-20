@@ -1,5 +1,4 @@
 # Group-Project-Data-Vis
-___________________________
 ##Group 4: 
 * Aishe Memetova
 * Haotian Bu 
