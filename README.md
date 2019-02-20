@@ -1,5 +1,5 @@
 # Group-Project-Data-Vis
-##Group 4: 
+## Group 4: 
 * Aishe Memetova
 * Haotian Bu 
 * Jon White
