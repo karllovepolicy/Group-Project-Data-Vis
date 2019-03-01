@@ -11,10 +11,14 @@ Using the Seattle Sound Transit Data of October-November 2015, we will try to se
 
 Loading neccessary packages, calling dataset and preparing it for analysis
 ```{r}
-mydata1=read.csv("https://raw.githubusercontent.com/jwhite00/VisualAnalytics_2_tabularData/master/data/newLinkData.csv")
+mydata1=read.csv("https://raw.githubusercontent.com/jwhite00/Group-Project-Data-Vis/master/Data/newLinkData.csv")
 library(ggplot2)
 library(scales)
 ```
+```{r}
+str(mydata1)
+```
+
 
 #Table Prep:
 ```{r freqTab_abs}
@@ -56,3 +60,157 @@ plot5 = plot4 + geom_text(aes(y = pct ,
 plot6=plot5 + coord_flip()
 plot6
 ```
+
+```{r bivariable }
+library(dplyr)
+library(ggplot2)
+OriginTime=table(mydata1$origin,mydata1$timeperiod)%>%
+         prop.table(margin = 2)%>%   # 2 is % by column
+         "*"(100)%>%
+         round(3)
+
+df=as.data.frame(OriginTime)
+colnames(df)=c('origin','timeperiod','percent')
+df <- df %>% mutate(origin=
+                ifelse(origin == "#NULL!", 
+                       "Null", as.character(origin)))
+df$origin <- as.factor(df$origin)
+
+
+bibase = ggplot(df, aes(x = origin, y = timeperiod, fill =percent))
+heat1 = bibase + geom_tile()
+heat2 = heat1 +scale_fill_gradient(low = "white", 
+                                   high = "black")
+#biplot = bibase + geom_point(aes(size = percent),colour = "gray")# + scale_fill_gradient(low = "yellow", high = "purple")
+#biplot
+heat2
+```
+
+```{r biva faretype vs. income}
+library(dplyr)
+library(ggplot2)
+
+IncomeFare=table(mydata1$faretype, mydata1$hhincome)%>%
+         prop.table(margin = 2)%>%   # 2 is % by column
+         "*"(100)%>%
+         round(3)
+
+df2=as.data.frame(IncomeFare)
+colnames(df2)=c('Income','Faretype','Percent')
+df2 <- df2 %>% mutate(Faretype=
+                ifelse(Faretype == "#NULL!", 
+                       "Null", as.character(Faretype)))
+#df2$origin <- as.factor(df$origin)
+
+
+bibase2 = ggplot(df2, aes(x = Income, y = Faretype, fill = Percent))
+heat3 = bibase2 + geom_tile()
+heat4 = heat3 +scale_fill_gradient(low = "yellow", 
+                                   high = "red") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+#biplot = bibase + geom_point(aes(size = percent),colour = "gray")# + scale_fill_gradient(low = "yellow", high = "purple")
+#biplot
+heat4
+```
+
+```{r biva faretype vs. origin}
+
+
+
+OriginFare=table(mydata1$faretype, mydata1$origin)%>%
+         prop.table(margin = 2)%>%   # 2 is % by column
+         "*"(100)%>%
+         round(3)
+
+df3=as.data.frame(OriginFare)
+colnames(df3)=c('Faretype','Origin','Percent')
+df3 <- df3 %>% mutate(Faretype=
+                ifelse(Faretype == "#NULL!", 
+                       "Null", as.character(Faretype)))
+#df2$origin <- as.factor(df$origin)
+
+
+bibase3 = ggplot(df3, aes(x = Faretype, y = Origin,  fill = Percent))
+heat6 = bibase3 + geom_tile()
+heat7 = heat6 +scale_fill_gradient(low = "yellow", 
+                                   high = "red") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+#biplot = bibase + geom_point(aes(size = percent),colour = "gray")# + scale_fill_gradient(low = "yellow", high = "purple")
+#biplot
+heat7
+```
+
+
+```{r biva faretype vs. numberoftrips}
+
+
+AgeFare=table(mydata1$faretype, mydata1$oneway_all_clean)%>%
+         prop.table(margin = 2)%>%   # 2 is % by column
+         "*"(100)%>%
+         round(3)
+AgeFare
+
+df6=as.data.frame(AgeFare)
+colnames(df6)=c('Faretype','Age','Percent')
+df6 <- df6 %>% mutate(Faretype=
+                ifelse(Faretype == "#NULL!", 
+                       "Null", as.character(Faretype)))
+#df2$origin <- as.factor(df$origin)
+
+
+bibase6 = ggplot(df6, aes(x = Age, y = Faretype, fill = Percent))
+heat3 = bibase2 + geom_tile()
+heat4 = heat3 +scale_fill_gradient(low = "yellow", 
+                                   high = "red") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+#biplot = bibase + geom_point(aes(size = percent),colour = "gray")# + scale_fill_gradient(low = "yellow", high = "purple")
+#biplot
+heat4
+```
+
+#oneway_all_clean
+
+
+```{r multi}
+mydata2 <- mydata1 %>% mutate(cashlove = ifelse(faretype=="Cash", 1, 0))
+head(mydata2)
+```
+
+```{r multi logit regression}
+
+mydata2$cashlove <- factor(mydata2$cashlove)
+mydata2$hhveh_clean <- as.numeric(mydata2$hhveh_clean)
+mydata2$oneway_all_clean <- as.numeric(mydata2$oneway_all_clean)
+
+mylogit1 <- glm(cashlove ~ purpose, data = mydata2, family = "binomial")
+model1 = tidy(mylogit1) %>%   # we save the result as a tidy object and...
+    mutate(model = "Model 1")
+```
+
+
+```{r}
+mylogit2 <- glm(cashlove ~ purpose + oneway_all_clean, data = mydata2, family = "binomial")
+model2 = tidy(mylogit2) %>%   # we save the result as a tidy object and...
+    mutate(model = "Model 2")
+```
+
+```{r}
+mylogit3 <- glm(cashlove ~ purpose + oneway_all_clean + hhveh_clean, data = mydata2, family = "binomial")
+model3 = tidy(mylogit3) %>%   # we save the result as a tidy object and...
+    mutate(model = "Model 3")
+```
+
+```{r}
+library(dotwhisker)
+library(broom)
+library(dplyr)
+
+
+allModels=rbind(model1, model2, model3)
+
+dwplot(allModels)
+```
+
+
+
+
